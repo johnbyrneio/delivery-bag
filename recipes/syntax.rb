@@ -39,6 +39,7 @@ data_bag_list.each do |databag|
     execute 'Test Data Bag Item Upload' do
       command "knife data bag from file -z #{databag} #{item}"
       action :run
+      only_if { changed_files.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], item)) }
     end
   end
 end
