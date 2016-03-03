@@ -36,10 +36,13 @@ data_bag_list.each do |databag|
   data_bag_item_list = Dir.glob("#{databag}/*.json")
 
   data_bag_item_list.each do |item|
+
+    log("Attempting to upload #{File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], item)}")
+
     execute 'Test Data Bag Item Upload' do
       command "knife data bag from file -z #{databag} #{item}"
       action :run
-      only_if { changed_files.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], item)) }
+      only_if { changed_files.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'],item)) }
     end
   end
 end
