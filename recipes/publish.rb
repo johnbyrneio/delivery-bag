@@ -30,6 +30,7 @@ data_bag_list.each do |databag|
   execute 'Create Data Bag on Chef Server' do
     command "knife data bag create --config #{delivery_knife_rb}  #{databag}"
     action :run
+    only_if { changed_files.any? { |s| s.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], databag)) } }
   end
 
   # Get list of data bag items
@@ -39,6 +40,7 @@ data_bag_list.each do |databag|
     execute 'Upload Data Bag Item to Chef Server' do
       command "knife data bag from file --config #{delivery_knife_rb}  #{databag} #{item}"
       action :run
+      only_if { changed_files.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'],item)) }
     end
   end
 end
