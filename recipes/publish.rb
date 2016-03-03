@@ -27,7 +27,7 @@ data_bag_list = Dir.glob("*").select {|f| File.directory? f}
 
 # For each data bag in the repository test creating the data bag and items within
 data_bag_list.each do |databag|
-  execute 'Test Data Bag Creation' do
+  execute 'Create Data Bag on Chef Server' do
     command "knife data bag create --config #{delivery_knife_rb}  #{databag}"
     action :run
   end
@@ -36,7 +36,7 @@ data_bag_list.each do |databag|
   data_bag_item_list = Dir.glob("#{databag}/*.json")
 
   data_bag_item_list.each do |item|
-    execute 'Test Data Bag Item Upload' do
+    execute 'Upload Data Bag Item to Chef Server' do
       command "knife data bag from file --config #{delivery_knife_rb}  #{databag} #{item}"
       action :run
     end
