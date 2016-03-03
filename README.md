@@ -97,7 +97,7 @@ source "https://supermarket.chef.io"
 
 metadata
 
-cookbook 'delivery-truck', github: 'johnbyrneio/delivery-bag'
+cookbook 'delivery-bag', github: 'johnbyrneio/delivery-bag'
 cookbook 'delivery-sugar', github: 'chef-cookbooks/delivery-sugar'
 
 ```
