@@ -1,5 +1,5 @@
 # `delivery-bag`
-`delivery-bag` is a Chef Delivery build_cookbook for continuously delivering Chef data bags.
+`delivery-bag` is a Chef Delivery build cookbook for continuously delivering Chef data bags.
 
 ## Phases
 Currently, delivery-bag only implements two Delivery phases, syntax and publish.
@@ -10,6 +10,8 @@ During Delivery's syntax phase, delivery-bag will verify proper json structure a
 ### Publish
 During Delivery's publish phase, delivery-bag will create data bags on the target Chef server and upload data bag items.
 
+## Getting Started
+
 To quickly get started you just need to set `delivery-bag` to
 be your build cookbook in your `.delivery/config.json`.
 
@@ -18,7 +20,7 @@ be your build cookbook in your `.delivery/config.json`.
   "version": "2",
   "build_cookbook": {
     "name": "delivery-bag",
-    "git": "https://github.com/chef-cookbooks/delivery-bag.git"
+    "git": "https://github.com/johnbyrneio/delivery-bag.git"
   }
 }
 ```
@@ -32,7 +34,7 @@ my_repo:/
 		item2.json
 	databag_bar/
 		item1.json
- 
+
 You can specify a different location within the repository by adding the following to .delivery/config.json. In this example, we are having delivery-bag look inside a directory called 'data_bags' within the repository
 
 ```json
@@ -40,7 +42,7 @@ You can specify a different location within the repository by adding the followi
   "version": "2",
   "build_cookbook": {
     "name": "delivery-bag",
-    "git": "https://github.com/chef-cookbooks/delivery-bag.git"
+    "git": "https://github.com/johnbyrneio/delivery-bag.git"
   },
   "delivery-bag": {
     "data-bag-repo-path": "data_bags"
@@ -56,7 +58,7 @@ The following phases have no content and can be skipped: unit, lint, quality, se
   "version": "2",
   "build_cookbook": {
     "name": "delivery-bag",
-    "git": "https://github.com/chef-cookbooks/delivery-bag.git"
+    "git": "https://github.com/johnbyrneio/delivery-bag.git"
   },
   "skip_phases": [
     "unit",
@@ -95,7 +97,7 @@ source "https://supermarket.chef.io"
 
 metadata
 
-cookbook 'delivery-truck', github: 'chef-cookbooks/delivery-bag'
+cookbook 'delivery-truck', github: 'johnbyrneio/delivery-bag'
 cookbook 'delivery-sugar', github: 'chef-cookbooks/delivery-sugar'
 
 ```
