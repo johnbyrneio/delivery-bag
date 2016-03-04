@@ -27,7 +27,10 @@ data_bag_list = Dir.glob("*").select {|f| File.directory? f}
 
 # For each data bag in the repository test creating the data bag and items within
 data_bag_list.each do |databag|
-  execute 'Test Data Bag Creation' do
+  
+  log("Attempting to create data bag #{databag}")
+  
+  execute "Test Data Bag Creation - #{databag}" do
     command "knife data bag create -z #{databag}"
     action :run
     only_if { changed_files.any? { |s| s.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], databag) ) } }
@@ -40,7 +43,7 @@ data_bag_list.each do |databag|
 
     log("Attempting to upload #{File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], item)}")
 
-    execute 'Test Data Bag Item Upload' do
+    execute "Test Data Bag Item Upload - #{item}" do
       command "knife data bag from file -z #{databag} #{item}"
       action :run
       only_if { changed_files.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'],item)) }
