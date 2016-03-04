@@ -35,7 +35,7 @@ data_bag_list.each do |databag|
   execute "Test Data Bag Creation - #{databag}" do
     command "knife data bag create -z #{databag}"
     action :run
-    only_if { changed_files.any? { |s| s.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'], databag) ) } }
+    only_if { changed_files.any? { |s| s.include?(databag) } }
   end
 
   # Get list of data bag items
@@ -48,7 +48,7 @@ data_bag_list.each do |databag|
     execute "Test Data Bag Item Upload - #{item}" do
       command "knife data bag from file -z #{databag} #{item}"
       action :run
-      only_if { changed_files.include?(File.join(node['delivery']['config']['delivery-bag']['data-bag-repo-path'],item)) }
+      only_if { changed_files.include?(item) }
     end
   end
 end
