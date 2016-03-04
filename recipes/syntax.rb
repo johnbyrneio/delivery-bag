@@ -25,6 +25,8 @@ data_bag_path = File.join(node['delivery']['workspace']['repo'], node['delivery'
 Dir.chdir(data_bag_path)
 data_bag_list = Dir.glob("*").select {|f| File.directory? f}
 
+log("Changed files: #{changed_files.to_s}")
+
 # For each data bag in the repository test creating the data bag and items within
 data_bag_list.each do |databag|
   
@@ -50,3 +52,5 @@ data_bag_list.each do |databag|
     end
   end
 end
+
+log("Changed files: #{changed_files.to_s}")
